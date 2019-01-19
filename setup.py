@@ -7,7 +7,10 @@ setup(
 	install_requires=(
 		'requests',
 		'Flask',
-		'pymongo',
+		'Flask-Script',
+		'Flask-PyMongo',
+		'flask-cors',
+		'pymongo'
 	),
 	packages=find_packages(),
 	license='MIT',

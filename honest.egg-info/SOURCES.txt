@@ -1,0 +1,10 @@
+setup.py
+honest/__init__.py
+honest.egg-info/PKG-INFO
+honest.egg-info/SOURCES.txt
+honest.egg-info/dependency_links.txt
+honest.egg-info/not-zip-safe
+honest.egg-info/requires.txt
+honest.egg-info/top_level.txt
+honest/main/__init__.py
+honest/main/views.py
