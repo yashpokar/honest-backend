@@ -1,6 +1,0 @@
-requests
-Flask
-Flask-Script
-Flask-PyMongo
-flask-cors
-pymongo
