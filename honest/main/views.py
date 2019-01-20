@@ -20,17 +20,17 @@ def home():
 			'referer': 'https://www.latlong.net/',
 		},
 		data={
-			'c1': 'Stumpergasse 51, 1060 Vienna',
+			'c1': address,
 			'action': 'gpcm',
 			'cp': '',
 		}
 	)
 
-	[latitude, longitude] = response.content.decode('utf-8').split(',')
+	results = response.content.decode('utf-8').split(',')
 
-	results = mongo.db.outlets.find_one({ 'geometry': { '$geoIntersects': { '$geometry': { 'type': 'Point', 'coordinates': [ float(longitude), float(latitude) ] } } } })
-
-	if not results:
+	try:
+		outlet = mongo.db.outlets.find_one({ 'geometry': { '$geoIntersects': { '$geometry': { 'type': 'Point', 'coordinates': [ float(longitude), float(latitude) ] } } } })
+	except:
 		return jsonify(success=False, error='not found')
 
-	return jsonify(outlet=results['name'], success=True)
+	return jsonify(outlet=outlet['name'], success=True)
