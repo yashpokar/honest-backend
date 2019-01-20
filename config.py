@@ -8,4 +8,5 @@ class LocalConfig(Config):
 	DEBUG = True
 
 	MONGO_URI = 'mongodb://localhost:27017/honest'
+	MONGO_COLLECTION_NAME = 'outlets'
 	ALLOWED_ORIGINS = '*'

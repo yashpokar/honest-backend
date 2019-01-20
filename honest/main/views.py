@@ -1,5 +1,5 @@
 import json
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, current_app as app
 from honest import mongo
 import requests
 
@@ -29,8 +29,10 @@ def home():
 	results = response.content.decode('utf-8').split(',')
 
 	try:
-		outlet = mongo.db.outlets.find_one({ 'geometry': { '$geoIntersects': { '$geometry': { 'type': 'Point', 'coordinates': [ float(longitude), float(latitude) ] } } } })
-	except:
+		[latitude, longitude] = results
+
+		outlet = mongo.db[app.config['MONGO_COLLECTION_NAME']].find_one({ 'geometry': { '$geoIntersects': { '$geometry': { 'type': 'Point', 'coordinates': [ float(longitude), float(latitude) ] } } } })
+	except Exception as e:
 		return jsonify(success=False, error='not found')
 
 	return jsonify(outlet=outlet['name'], success=True)
